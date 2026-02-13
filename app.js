@@ -1,4 +1,4 @@
-const UNLOCK_AT_ISO = "2026-02-13T00:00:00+05:30";
+const UNLOCK_AT_ISO = "2026-02-14T00:00:00+05:30";
 
 const lockScreen = document.getElementById('lock-screen');
 const main = document.getElementById('main');
@@ -607,7 +607,7 @@ if (REASONS.length) {
   rollBtn.disabled = true;
   rollNextBtn.disabled = true;
   reasonTitle.textContent = 'Reasons not loaded';
-  reasonText.textContent = 'Add your reasons to reasons.js (window.REASONS = [...]) and reload.';
+  reasonText.textContent = 'Add your reasons to data.js (window.REASONS = [...]) and reload.';
   reasonCard.hidden = false;
 }
 
