@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>From Tanish to Umme</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="is-locked">
+  <div id="lock-screen" role="dialog" aria-live="polite" aria-label="Countdown to unlock">
+    <div class="lock-bg"></div>
+    <div class="lock-content">
+      <h1 class="lock-title">TO MY FAVORITE LITTLE BABY BART</h1>
+      <p class="lock-sub">There’s a dramatic door. It opens at midnight.<br>STOP TRYING TO CHEAT THE COUNTDOWN.</p>
+      <div class="countdown" id="countdown" aria-live="polite">
+        <div class="time-block"><span id="cd-days">00</span><small>Days</small></div>
+        <div class="time-block"><span id="cd-hours">00</span><small>Hours</small></div>
+        <div class="time-block"><span id="cd-mins">00</span><small>Minutes</small></div>
+        <div class="time-block"><span id="cd-secs">00</span><small>Seconds</small></div>
+      </div>
+      <div class="lock-note">Opens at 00:00 on Feb 14. Be patient. WAAA.</div>
+      <div class="lock-anim" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <main id="main" aria-hidden="true" hidden>
+    <canvas id="particles" aria-hidden="true"></canvas>
+    <canvas id="confetti" aria-hidden="true"></canvas>
+
+    <section id="intro" class="section">
+      <div class="intro-card" id="intro-card">
+        <p class="type-line" data-type data-full-text="okay listen"></p>
+        <p class="type-line" data-type data-full-text="some rooms are dark and quiet"></p>
+        <p class="type-line" data-type data-full-text="but when you’re there it feels safe and warm and stupidly comfy"></p>
+        <button id="begin-btn" class="primary-btn">Begin (no backing out now)</button>
+        <div id="sound-gate" class="sound-gate" hidden>
+          <span>Sound off. Tap or I cry.</span>
+          <button id="enable-sound" class="ghost-btn">Tap to enable sound</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="mood" class="section gated" data-stage="after-begin">
+      <div class="card mood-card">
+        <p class="type-line" data-type data-full-text="dark rooms + you = my brain finally shuts up"></p>
+        <p class="type-line" data-type data-full-text="you are chaos to the world but soft to me and that is illegal honestly"></p>
+        <button id="mood-continue" class="ghost-btn" hidden>continue ↓ (come here bart)</button>
+        <button class="egg-dot" aria-label="Hidden note" data-egg="darkroom">•</button>
+      </div>
+    </section>
+
+    <section id="question1" class="section gated" data-stage="after-mood">
+      <div class="card">
+        <h2>Umme Aiman<br>will you be my Valentine or do I have to cry dramatically</h2>
+        <div class="button-row" id="valentine-buttons">
+          <button id="yes-btn" class="primary-btn">Yes</button>
+          <button id="no-btn" class="ghost-btn">No (good luck clicking this lol)</button>
+        </div>
+        <div class="note" id="valentine-note" aria-live="polite"></div>
+        <div class="progress-ribbon" id="progress-ribbon" hidden>Door 1 opened</div>
+        <button id="to-letter" class="secondary-btn" hidden>Next</button>
+        <div class="tulip-flourish" aria-hidden="true"></div>
+        <span class="egg-inline shimmer" data-egg="eepi" tabindex="0" role="button">eepi sleepi</span>
+      </div>
+    </section>
+
+    <section id="letter" class="section gated" data-stage="after-yes">
+      <div class="card">
+        <h2>okay fine here is the "proper ask" you kept bullying me for</h2>
+        <p class="reveal">we’ve known each other for like a year+ and dating for seven months and you keep going “ask me properly idiot” so here i am doing it properly like a responsible human (barely)</p>
+        <p class="reveal">you’re chaotic, jealous, clingy, overthinking, dramatic… and somehow still the softest person only with me. unfair honestly.</p>
+        <p class="reveal">our first sushi date at <span class="shimmer" tabindex="0" role="button" data-egg="phoenix">Forum</span> still lives in my head rent free. especially that massage chair moment. you looked so betrayed. i almost died laughing.</p>
+        <p class="reveal">now tulips are you-coded. shawarma is you-coded. dark rooms are you-coded. everything is you-coded. this is a disease.</p>
+        <p class="reveal">you sleep on call with me. you fix my hair. you yell at me to eat. you stay awake when i’m sad. you healed my brain without even trying. that’s crazy.</p>
+        <p class="reveal">also “eepi sleepi” is still the cutest dumbest phrase ever and i’m never letting it die.</p>
+        <p class="type-line end-line" id="letter-endline" data-type data-full-text="anyway. one more thing. but you gotta earn it because drama."></p>
+        <button id="to-door-from-letter" class="primary-btn">Approach the Door</button>
+      </div>
+      <button class="tiny-egg" id="tulip-egg" data-egg="tulip" aria-label="Tiny tulip">❦</button>
+    </section>
+
+    <section id="reasons" class="section gated" data-stage="after-yes">
+      <div class="card">
+        <h2>500 reasons why i like you (yes FIVE HUNDRED don’t argue)</h2>
+        <p class="soft">roll the dice. get attacked by affection.</p>
+        <div class="dice-row">
+          <button id="roll-btn" class="primary-btn">Roll the Dice</button>
+          <div class="dice" id="dice" aria-live="polite">0</div>
+        </div>
+        <div class="reason-card" id="reason-card" hidden>
+          <div class="reason-title" id="reason-title">Reason</div>
+          <div class="reason-text" id="reason-text"></div>
+          <div class="reason-actions">
+            <button id="favorite-btn" class="secondary-btn">Favorites (proof i’m obsessed)</button>
+            <button id="roll-next" class="ghost-btn">Next roll</button>
+          </div>
+        </div>
+        <div class="favorites">
+          <button id="favorites-toggle" class="ghost-btn">Favorites (proof i’m obsessed)</button>
+          <div id="favorites-drawer" class="drawer" hidden>
+            <div id="favorites-list" class="favorites-list"></div>
+          </div>
+        </div>
+        <button id="to-door" class="secondary-btn">okay okay continue to the door</button>
+        <span class="egg-inline" data-egg="shawarma" tabindex="0" role="button">(a tiny shawarma nod)</span>
+      </div>
+    </section>
+
+    <section id="puzzle" class="section gated" data-stage="after-letter">
+      <div class="card door-panel" id="door-panel">
+        <h2>ONE MORE DOOR</h2>
+        <p class="soft">last test. use your brain. i believe in you (mostly)</p>
+        <div class="puzzle">
+          <div class="puzzle-step">
+            <h3>Step A - Memory</h3>
+            <p>Count the letters in “Forum” (ignore the space).<br>Yes this is about our sushi date.<br>Type the number of letters here.</p>
+            <input id="step1" type="number" inputmode="numeric" placeholder="Number" aria-label="Step A answer" />
+          </div>
+          <div class="puzzle-step">
+            <h3>Step B - Math</h3>
+            <p>We’ve known each other about 12 months and dated 7 months.<br>Add them: 12 + 7 = ?<br>Type the answer.</p>
+            <input id="step2" type="number" inputmode="numeric" placeholder="Number" aria-label="Step B answer" />
+          </div>
+          <div class="puzzle-step">
+            <h3>Step C - Physics</h3>
+            <p>Okay physics time, don’t fight me.<br>A sushi plate starts three-quarters of a circle away on the belt.<br><br>Given:<br>- Radius r = 1.4 m<br>- Speed v = 0.35 m/s<br>- Distance traveled = (3/4) × (2πr)<br><br>Find time:<br>t = distance / v<br>Round to the nearest whole second.<br><br>Type the final seconds.</p>
+            <input id="step3" type="number" inputmode="numeric" placeholder="Seconds" aria-label="Step C answer" />
+          </div>
+          <div class="puzzle-step">
+            <h3>Step D - Passphrase</h3>
+            <p>take the number that repeats and grab the secret words. type the phrase we say every night.</p>
+            <div class="line">At Forum, the belt hummed softly and you smiled; I counted plates and whispered our code tonight: <strong>eepi</strong>.</div>
+            <div class="line">In a dark room after shawarma, we laughed at our sleepy phrase and it stuck: <strong>sleepi</strong>.</div>
+            <input id="passphrase" type="text" placeholder="type the sleepy phrase dummy" aria-label="Passphrase" />
+            <button id="unlock-door" class="primary-btn">Unlock the Door (dramatic)</button>
+          </div>
+          <div class="hint-box">
+            <button class="ghost-btn" data-hint="1">Hint 1</button>
+            <button class="ghost-btn" data-hint="2">Hint 2</button>
+            <button class="ghost-btn" data-hint="3">Show solution</button>
+            <div id="hint-text" class="note" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="final-overlay" aria-hidden="true">
+    <canvas id="stars"></canvas>
+    <div class="final-text">
+      <p id="final-question">Umme Aiman...<br>will you be my girlfriend<br>like officially officially<br>not fake officially<br>REAL officially</p>
+      <div class="final-buttons">
+        <button id="final-yes" class="primary-btn">Yes obviously</button>
+        <button id="final-soft" class="ghost-btn">wait i’m blushing</button>
+      </div>
+      <div id="final-message" class="final-message" hidden>
+        <div>thank you for choosing me</div>
+        <div>you are stuck forever wiwii</div>
+        <div>WAAAA GIMME ATTENTION :c</div>
+      </div>
+      <div id="final-actions" class="final-actions" hidden>
+        <button id="replay" class="secondary-btn">Replay chaos</button>
+        <button id="final-favorites" class="ghost-btn">Favorites</button>
+        <button id="final-reason" class="ghost-btn">One last reason</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="egg-modal" class="modal" hidden aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-live="polite">
+      <div id="egg-text" class="modal-text"></div>
+      <button id="egg-close" class="secondary-btn">Close</button>
+    </div>
+  </div>
+
+  <audio id="bgm" preload="none" loop></audio>
+
+  <script src="reasons.js" defer></script>
+  <script src="script.js" defer></script>
+</body>
+</html>
